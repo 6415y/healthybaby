@@ -1,18 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.joo.healthybaby.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.example.joo.healthybaby.MainActivity"
+    >
+    <GridLayout
+        android:id="@+id/mainlayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:columnCount="4"
+        android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/mainbaby"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mainbaby" />
+
+        <TextView
+            android:id="@+id/babyprofile"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="0"
+            android:text="이름:\n나이:\n체중:\n" />
+
+        <Button
+            android:id="@+id/chgprobtn"
+            android:layout_gravity="fill_horizontal"
+            android:text="프로필변경" />
+
+        <Button
+            android:id="@+id/growthbtn"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_rowSpan="2"
+            android:text="발육 성장체크" />
+
+        <Button
+            android:id="@+id/dietbtn"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_rowSpan="2"
+            android:text="식단 기록" />
+
+        <Button
+            android:id="@+id/vaccinbtn"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_rowSpan="2"
+            android:text="예방 접종" />
+
+        <Button
+            android:id="@+id/allergybtn"
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill"
+            android:layout_rowSpan="2"
+            android:text="알러지 기록" />
+
+        <Button
+            android:id="@+id/totalreportbtn"
+            android:layout_columnSpan="4"
+            android:layout_gravity="fill"
+            android:text="종합 리포트" />
+    </GridLayout>
+</ScrollView>
