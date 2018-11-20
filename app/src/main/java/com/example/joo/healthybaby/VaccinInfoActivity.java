@@ -39,6 +39,11 @@ public class VaccinInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccin_info);
 
+        /*
+         *  Intent getInent = getIntent(); ......
+         *
+         *  VaccinDetailActivity에서 넘겨준 VaccinInfoDetail class를 가져옴
+         */
         Intent getInent = getIntent();
         final VaccinInfoDetail vaccinInfoDetail = (VaccinInfoDetail)getInent.getSerializableExtra("VaccinInfoDetail");
 
@@ -56,6 +61,12 @@ public class VaccinInfoActivity extends AppCompatActivity {
         diseaseName_tv.setText(vaccinInfoDetail.getVaccinInfo());
         notiYesOrNo_tv.setText("설정하지 않음");
         vaccinYesOrNo.setText("접종하지 않음");
+
+        /*
+         *  databaseReference.child("InoculateResult").addChildEventListener(new ChildEventListener() { ......
+         *
+         *  Firebase에서 접종정보를 가져와 현재 선택된 백신이름과 같으면 vaccinYesOrNo의 내용을 접종일자로 바꿈
+         */
         databaseReference.child("InoculateResult").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -85,6 +96,11 @@ public class VaccinInfoActivity extends AppCompatActivity {
             }
         });
 
+        /*
+         *  vaccin_btn.setOnClickListener(new View.OnClickListener() { .....
+         *
+         *  DatePicker 다이얼로그에서 날짜를 선택하게 하고 그 날짜와 백신정보를 를 Firebasedp 업로드 한다.
+         */
         vaccin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +119,11 @@ public class VaccinInfoActivity extends AppCompatActivity {
             }
         });
 
+        /*
+         *  noti_btn.setOnClickListener(new View.OnClickListener() { .......
+         *
+         *  DatePicker 다이얼로그와 TimePicker 다이얼로그를 사용해 Notification을 설정한다.
+         */
         noti_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

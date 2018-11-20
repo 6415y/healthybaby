@@ -54,6 +54,11 @@ public class RecyclerAdapForVacinnDetail extends RecyclerView.Adapter<RecyclerVi
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+        /*
+         *  databaseReference.child("InoculateResult").addChildEventListener(new ChildEventListener() {........
+         *
+         *  Firebase에서 예방접종 내용을 가져와서 지금 설정하고 있는 item의 백신 이름과 같으면 파란색으로 표시
+         */
         databaseReference.child("InoculateResult").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -86,6 +91,13 @@ public class RecyclerAdapForVacinnDetail extends RecyclerView.Adapter<RecyclerVi
 
             }
         });
+
+        /*
+         *  if(vaccinInfoList.size() - index <= position) { ......
+         *
+         *  VaccinDetailActivity에서 구한 index를 사용해 만약 이미 접종시기가 지난것은 검은색으로
+         *  age랑 접종시기가 같거나 한달 뒤에 맞아야 한다면 빨간색으로 표현
+         */
         if(vaccinInfoList.size() - index <= position) {
             recyclerViewHolder.itemView.setBackgroundColor(Color.BLACK);
             recyclerViewHolder.tvVaccinNameDetail.setTextColor(Color.WHITE);

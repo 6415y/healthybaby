@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 
 /* 예방접종 관련 액티비티입니다
@@ -22,13 +18,7 @@ public class VaccinActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-    /*
-    * int age
-    * db에서 태어난지 얼마나 됬는지 가져와야 하나 db가 없는 관계로 임시로 선언
-     */
     int age = 2;
 
     @Override
@@ -40,6 +30,12 @@ public class VaccinActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        /*
+         *   final VaccinInfo[] vaccinInfo
+         *
+         *   백신에 대한 데이터를 저장하는 class
+         */
 
         final VaccinInfo[] vaccinInfo = new VaccinInfo[17];
         vaccinInfo[0] = new VaccinInfo("BCG(피내용)", "결핵", new int[] {0});
@@ -61,14 +57,28 @@ public class VaccinActivity extends AppCompatActivity {
         vaccinInfo[16] =new VaccinInfo("RV5", "로타바이러스 감염증", new int[] {2,4,6});
 
 
+        /*
+         *  final ArrayList<VaccinInfo> vaccinInfoArrayList
+         *
+         *  vaccinInfo를 담는 ArrayList
+         */
         final ArrayList<VaccinInfo> vaccinInfoArrayList = new ArrayList<>();
         for(int i =0;i<vaccinInfo.length;i++)
             vaccinInfoArrayList.add(vaccinInfo[i]);
 
-
+        /*
+         *  RecyclerViewAdapter recyclerViewAdapter
+         *
+         *  RecylcerView가 어떻게 구성되는지 설정해주는 Adapter
+         */
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(vaccinInfoArrayList);
         mRecyclerView.setAdapter(recyclerViewAdapter);
 
+        /*
+         *  ItemClickSupport.addTo(mRecyclerView, R.id.Vaccin_recyclerView).....
+         *
+         *  RecyclerView item마다 클릭 이벤트를 만들어 주는 클래스
+         */
         ItemClickSupport.addTo(mRecyclerView, R.id.Vaccin_recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
