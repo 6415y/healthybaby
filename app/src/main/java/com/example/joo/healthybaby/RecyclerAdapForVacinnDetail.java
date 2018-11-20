@@ -2,12 +2,14 @@ package com.example.joo.healthybaby;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,9 +54,9 @@ public class RecyclerAdapForVacinnDetail extends RecyclerView.Adapter<RecyclerVi
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-        databaseReference.child("InoculateResult").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("InoculateResult").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 InoculateInfo inoInfo = dataSnapshot.getValue(InoculateInfo.class);
                 if(inoInfo != null) {
                     if (vaccinInfoList.get(position).getVaccinName().equals(inoInfo.getVaccinName())) {
@@ -62,6 +64,21 @@ public class RecyclerAdapForVacinnDetail extends RecyclerView.Adapter<RecyclerVi
                         recyclerViewHolder.tvVaccinNameDetail.setTextColor(Color.WHITE);
                     }
                 }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override

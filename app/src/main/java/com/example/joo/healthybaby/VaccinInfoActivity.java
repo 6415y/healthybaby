@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,16 +55,28 @@ public class VaccinInfoActivity extends AppCompatActivity {
         vaccinInoculate_tv.setText(Integer.toString(vaccinInfoDetail.getInoculateDate()) + " 개월");
         diseaseName_tv.setText(vaccinInfoDetail.getVaccinInfo());
         notiYesOrNo_tv.setText("설정하지 않음");
-        databaseReference.child("InoculateResult").addValueEventListener(new ValueEventListener() {
+        vaccinYesOrNo.setText("접종하지 않음");
+        databaseReference.child("InoculateResult").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 InoculateInfo inoInfo = dataSnapshot.getValue(InoculateInfo.class);
-                if(inoInfo != null) {
-                    if (inoInfo.getVaccinName().equals(vaccinInfoDetail.getVaccinName()))
-                        vaccinYesOrNo.setText(inoInfo.getInoculateDate());
-                }
-                else
-                    vaccinYesOrNo.setText("접종하지 않음");
+                if (inoInfo != null && inoInfo.getVaccinName().equals(vaccinInfoDetail.getVaccinName()))
+                    vaccinYesOrNo.setText(inoInfo.getInoculateDate());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -79,7 +93,7 @@ public class VaccinInfoActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
                         InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(),i + "-" + i1 + "-" + i2);
-                        databaseReference.child("InoculateResult").setValue(info);
+                        databaseReference.child("InoculateResult").push().setValue(info);
 
 
                     }
