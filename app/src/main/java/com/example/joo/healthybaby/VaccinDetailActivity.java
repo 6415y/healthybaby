@@ -40,10 +40,7 @@ public class VaccinDetailActivity extends AppCompatActivity {
             if(age <= vaccinInfoDetail[index].getInoculateDate())
                 break;
 
-        for(int i = index; i < vaccinInfoDetail.length; i++)
-            vaccinInfoList.add(vaccinInfoDetail[i]);
-
-        for(int i = 0; i < index; i++)
+        for(int i = 0; i < vaccinInfoDetail.length; i++)
             vaccinInfoList.add(vaccinInfoDetail[i]);
 
         RecyclerAdapForVacinnDetail adap = new RecyclerAdapForVacinnDetail(vaccinInfoList, index, age);
