@@ -57,7 +57,7 @@ public class VaccinDetailActivity extends AppCompatActivity {
          *  이미 맞을 시기가 지난것과 아닌것을 찾기위한 for문
          */
         for(index =0; index < vaccinInfoDetail.length; index++)
-            if(age <= vaccinInfoDetail[index].getInoculateDate())
+            if(age < vaccinInfoDetail[index].getInoculateDate())
                 break;
 
         for(int i = 0; i < vaccinInfoDetail.length; i++)

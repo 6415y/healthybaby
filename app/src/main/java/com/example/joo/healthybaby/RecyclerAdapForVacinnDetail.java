@@ -98,12 +98,12 @@ public class RecyclerAdapForVacinnDetail extends RecyclerView.Adapter<RecyclerVi
          *  VaccinDetailActivity에서 구한 index를 사용해 만약 이미 접종시기가 지난것은 검은색으로
          *  age랑 접종시기가 같거나 한달 뒤에 맞아야 한다면 빨간색으로 표현
          */
-        if(vaccinInfoList.size() - index <= position) {
-            recyclerViewHolder.itemView.setBackgroundColor(Color.BLACK);
+        if(vaccinInfoList.get(position).getInoculateDate() == age ||  vaccinInfoList.get(position).getInoculateDate() == age + 1) {
+            recyclerViewHolder.itemView.setBackgroundColor(Color.RED);
             recyclerViewHolder.tvVaccinNameDetail.setTextColor(Color.WHITE);
         }
-        else if(vaccinInfoList.get(position).getInoculateDate() == age ||  vaccinInfoList.get(position).getInoculateDate() == age + 1){
-            recyclerViewHolder.itemView.setBackgroundColor(Color.RED);
+        else if(index > position) {
+            recyclerViewHolder.itemView.setBackgroundColor(Color.BLACK);
             recyclerViewHolder.tvVaccinNameDetail.setTextColor(Color.WHITE);
         }
     }
