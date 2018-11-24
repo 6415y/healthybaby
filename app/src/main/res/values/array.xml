@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Intensity">
-        <item >상</item>
-        <item >중</item>
-        <item >하</item>
+        <item>상</item>
+        <item>중</item>
+        <item>하</item>
+    </string-array>
+    <string-array name="Time">
+        <item>아침</item>
+        <item>점심</item>
+        <item>저녁</item>
     </string-array>
 </resources>

@@ -13,6 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * 알러지 기록 액티비티 입니다.
@@ -31,6 +38,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
     TextView occurrenceArea_tv;
     TextView occurrenceDate_tv;
+    Spinner occurrenceDate_sp;
 
     Spinner allergyIntensity_sp;
 
@@ -40,7 +48,14 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
     Button save_btn;
 
 
+    private String[] occurrenceArea_str;
     private int position;
+    private String time;
+    private String intensity;
+    private int foodIngredientsPosition;
+
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +71,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
         occurrenceArea_tv = (TextView) findViewById(R.id.occurrenceArea_tv_AllergyActivity);
         occurrenceDate_tv = (TextView) findViewById(R.id.occurrenceDate_tv_AllergyActivity);
+        occurrenceDate_sp = (Spinner) findViewById(R.id.occurrenceDate_sp_AllergyActivity);
 
         allergyIntensity_sp = (Spinner) findViewById(R.id.allergyIntensity_sp_AllergyActivity);
 
@@ -83,7 +99,19 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         allergyIntensity_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                intensity = adapterView.getItemAtPosition(i).toString();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        occurrenceDate_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                time = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -94,10 +122,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
         save_btn = (Button) findViewById(R.id.save_btn_AllergyActivity);
 
-        for(int i = 1; i < foodIngredients_et.length; i++)
+        for (int i = 1; i < foodIngredients_et.length; i++)
             foodIngredients_et[i].setVisibility(View.GONE);
 
-        for(int i = 1; i < foodIngredients_btn.length; i++) {
+        for (int i = 1; i < foodIngredients_btn.length; i++) {
             foodIngredients_btn[i].setVisibility(View.GONE);
             foodIngredients_btn[i].setOnClickListener(this);
         }
@@ -114,10 +142,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    public void ShowChoiceDialog(final String[] item) {
+    public void ShowChoiceDialog() {
         AlertDialog.Builder dig = new AlertDialog.Builder(AllergyActivity.this);
         dig.setTitle("부위 선택");
-        dig.setSingleChoiceItems(item, 0, new DialogInterface.OnClickListener() {
+        dig.setSingleChoiceItems(occurrenceArea_str, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 position = i;
@@ -127,7 +155,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         dig.setPositiveButton("선택", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                occurrenceArea_tv.setText(item[position]);
+                occurrenceArea_tv.setText(occurrenceArea_str[position]);
             }
         });
         dig.show();
@@ -135,8 +163,6 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        String[] occurrenceArea_str = null;
-
         switch (view.getId()) {
             case R.id.baby_head_iv_AllergyActivity:
                 occurrenceArea_str = new String[]{"얼굴", "목"};
@@ -166,14 +192,22 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 DatePickerDialog dig = new DatePickerDialog(AllergyActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        occurrenceDate_tv.setText(year + "-" + month + "-" + day);
+                        occurrenceDate_tv.setText(year + "-" + (month + 1) + "-" + day);
 
                     }
-                },2018,11,4);
+                }, 2018, 11, 4);
                 dig.show();
                 break;
 
             case R.id.save_btn_AllergyActivity:
+                List<String> foodIngerdientList = new ArrayList<String>();
+
+                for (int i = 0; i < foodIngredientsPosition + 1; i++)
+                    foodIngerdientList.add(foodIngredients_et[i].getText().toString());
+
+                AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList);
+                databaseReference.child("AllergyResult").child(result.getOccurrenceDate()).setValue(result);
+                Toast.makeText(AllergyActivity.this,"저장되었습니다.",Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.foodIngredients1_btn_AllergyActivity:
@@ -215,15 +249,16 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             default:
                 break;
         }
-        if(view.getId() == R.id.baby_head_iv_AllergyActivity || view.getId() == R.id.baby_body_iv_AllergyActivity ||
+        if (view.getId() == R.id.baby_head_iv_AllergyActivity || view.getId() == R.id.baby_body_iv_AllergyActivity ||
                 view.getId() == R.id.baby_lefthand_iv_AllergyActivity || view.getId() == R.id.baby_righthand_iv_AllergyActivity ||
                 view.getId() == R.id.baby_leftleg_iv_AllergyActivity || view.getId() == R.id.baby_leftleg_iv_AllergyActivity)
-            ShowChoiceDialog(occurrenceArea_str);
+            ShowChoiceDialog();
     }
 
-    public void WidgetSetInvisible(int i){
+    public void WidgetSetInvisible(int i) {
+        foodIngredientsPosition = i;
         foodIngredients_btn[i].setVisibility(View.VISIBLE);
-        foodIngredients_btn[i-1].setVisibility(View.GONE);
+        foodIngredients_btn[i - 1].setVisibility(View.GONE);
         foodIngredients_et[i].setVisibility(View.VISIBLE);
     }
 

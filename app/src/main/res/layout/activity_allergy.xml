@@ -144,28 +144,49 @@
                             android:text=""
                             android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/occurrenceDate_tv_AllergyActivity"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/occurrenceDate_tv_AllergyActivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1.4"
+                                android:gravity="center"
+                                android:hint="터치"
+                                android:textSize="12sp" />
+
+                            <Spinner
+                                android:id="@+id/occurrenceDate_sp_AllergyActivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1"
+                                android:entries="@array/Time" />
+                        </LinearLayout>
+
+                        <Spinner
+                            android:id="@+id/allergyIntensity_sp_AllergyActivity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="20dp"
-                            android:gravity="center"
-                            android:hint="여기를 클릭하세요"
-                            android:textSize="20sp" />
-
-                        <Spinner
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/allergyIntensity_sp_AllergyActivity"
-                            android:entries="@array/Intensity"
-                            android:layout_margin="20dp" />
+                            android:entries="@array/Intensity" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:focusable="true"
-                            android:focusableInTouchMode="true">
+                            android:focusableInTouchMode="true"
+                            android:orientation="horizontal">
 
                             <EditText
                                 android:id="@+id/foodIngredients1_et_AllergyActivity"
@@ -455,13 +476,13 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/save_btn_AllergyActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
                     android:layout_below="@+id/linearLayout_AllergyActivity"
-                    android:text="저장"
-                    android:id="@+id/save_btn_AllergyActivity"/>
+                    android:layout_centerHorizontal="true"
+                    android:text="저장" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
