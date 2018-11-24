@@ -106,7 +106,7 @@ public class VaccinInfoActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(VaccinInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, final int i, final int i1, final int i2) {
-                        InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(), i + "-" + i1 + "-" + i2);
+                        InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(), i + "-" + (i1 + 1) + "-" + i2);
                         databaseReference.child("InoculateResult").child(info.getVaccinName()).setValue(info);
                     }
                 }, 2018, 11, 4);
