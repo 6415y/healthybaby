@@ -3,10 +3,10 @@ package com.example.joo.healthybaby;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,7 +18,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class VaccinInfoActivity extends AppCompatActivity {
 
@@ -45,16 +44,16 @@ public class VaccinInfoActivity extends AppCompatActivity {
          *  VaccinDetailActivity에서 넘겨준 VaccinInfoDetail class를 가져옴
          */
         Intent getInent = getIntent();
-        final VaccinInfoDetail vaccinInfoDetail = (VaccinInfoDetail)getInent.getSerializableExtra("VaccinInfoDetail");
+        final VaccinInfoDetail vaccinInfoDetail = (VaccinInfoDetail) getInent.getSerializableExtra("VaccinInfoDetail");
 
 
-        vaccinName_tv = (TextView)findViewById(R.id.vaccinName_tv_VaccinInfoActivity);
-        vaccinInoculate_tv = (TextView)findViewById(R.id.vaccinInoculate_tv_VaccinInfoActivity);
-        diseaseName_tv = (TextView)findViewById(R.id.diseaseName_tv_VaccinInfoActivity);
-        vaccinYesOrNo = (TextView)findViewById(R.id.vaccinYesOrNo_tv_VaccinInfoActivity);
-        notiYesOrNo_tv = (TextView)findViewById(R.id.notiYesOrNo_tv_VaccinInfoActivity);
-        noti_btn = (Button)findViewById(R.id.noti_btn_VaccinInfoActivity);
-        vaccin_btn = (Button)findViewById(R.id.vaccin_btn_VaccinInfoActivity);
+        vaccinName_tv = (TextView) findViewById(R.id.vaccinName_tv_VaccinInfoActivity);
+        vaccinInoculate_tv = (TextView) findViewById(R.id.vaccinInoculate_tv_VaccinInfoActivity);
+        diseaseName_tv = (TextView) findViewById(R.id.diseaseName_tv_VaccinInfoActivity);
+        vaccinYesOrNo = (TextView) findViewById(R.id.vaccinYesOrNo_tv_VaccinInfoActivity);
+        notiYesOrNo_tv = (TextView) findViewById(R.id.notiYesOrNo_tv_VaccinInfoActivity);
+        noti_btn = (Button) findViewById(R.id.noti_btn_VaccinInfoActivity);
+        vaccin_btn = (Button) findViewById(R.id.vaccin_btn_VaccinInfoActivity);
 
         vaccinName_tv.setText(vaccinInfoDetail.getVaccinName());
         vaccinInoculate_tv.setText(Integer.toString(vaccinInfoDetail.getInoculateDate()) + " 개월");
@@ -73,26 +72,26 @@ public class VaccinInfoActivity extends AppCompatActivity {
                 InoculateInfo inoInfo = dataSnapshot.getValue(InoculateInfo.class);
                 if (inoInfo != null && inoInfo.getVaccinName().equals(vaccinInfoDetail.getVaccinName()))
                     vaccinYesOrNo.setText(inoInfo.getInoculateDate());
+
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                InoculateInfo inoInfo = dataSnapshot.getValue(InoculateInfo.class);
+                if (inoInfo != null && inoInfo.getVaccinName().equals(vaccinInfoDetail.getVaccinName()))
+                    vaccinYesOrNo.setText(inoInfo.getInoculateDate());
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -106,14 +105,11 @@ public class VaccinInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DatePickerDialog dialog = new DatePickerDialog(VaccinInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
-                        InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(),i + "-" + i1 + "-" + i2);
-                        databaseReference.child("InoculateResult").push().setValue(info);
-
-
+                    public void onDateSet(DatePicker datePicker, final int i, final int i1, final int i2) {
+                        InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(), i + "-" + i1 + "-" + i2);
+                        databaseReference.child("InoculateResult").child(info.getVaccinName()).setValue(info);
                     }
-                },2018,11,4);
+                }, 2018, 11, 4);
                 dialog.show();
 
             }
@@ -135,10 +131,10 @@ public class VaccinInfoActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker timePicker, int hour, int minite) {
 
                             }
-                        },0,0,false);
+                        }, 0, 0, false);
                         timeDialog.show();
                     }
-                },2018,11,4);
+                }, 2018, 11, 4);
                 dialog.show();
 
             }
