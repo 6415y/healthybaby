@@ -26,7 +26,6 @@ public class VaccinInfoActivity extends AppCompatActivity {
     TextView diseaseName_tv;
     TextView vaccinYesOrNo;
     TextView notiYesOrNo_tv;
-    Button noti_btn;
     Button vaccin_btn;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -52,13 +51,11 @@ public class VaccinInfoActivity extends AppCompatActivity {
         diseaseName_tv = (TextView) findViewById(R.id.diseaseName_tv_VaccinInfoActivity);
         vaccinYesOrNo = (TextView) findViewById(R.id.vaccinYesOrNo_tv_VaccinInfoActivity);
         notiYesOrNo_tv = (TextView) findViewById(R.id.notiYesOrNo_tv_VaccinInfoActivity);
-        noti_btn = (Button) findViewById(R.id.noti_btn_VaccinInfoActivity);
         vaccin_btn = (Button) findViewById(R.id.vaccin_btn_VaccinInfoActivity);
 
         vaccinName_tv.setText(vaccinInfoDetail.getVaccinName());
         vaccinInoculate_tv.setText(Integer.toString(vaccinInfoDetail.getInoculateDate()) + " 개월");
         diseaseName_tv.setText(vaccinInfoDetail.getVaccinInfo());
-        notiYesOrNo_tv.setText("설정하지 않음");
         vaccinYesOrNo.setText("접종하지 않음");
 
         /*
@@ -108,31 +105,6 @@ public class VaccinInfoActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, final int i, final int i1, final int i2) {
                         InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(), i + "-" + (i1 + 1) + "-" + i2);
                         databaseReference.child("InoculateResult").child(info.getVaccinName()).setValue(info);
-                    }
-                }, 2018, 11, 4);
-                dialog.show();
-
-            }
-        });
-
-        /*
-         *  noti_btn.setOnClickListener(new View.OnClickListener() { .......
-         *
-         *  DatePicker 다이얼로그와 TimePicker 다이얼로그를 사용해 Notification을 설정한다.
-         */
-        noti_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(VaccinInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        TimePickerDialog timeDialog = new TimePickerDialog(VaccinInfoActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int hour, int minite) {
-
-                            }
-                        }, 0, 0, false);
-                        timeDialog.show();
                     }
                 }, 2018, 11, 4);
                 dialog.show();

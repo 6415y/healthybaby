@@ -126,20 +126,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/noti_btn_VaccinInfoActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="50dp"
-            android:text="알림설정"
-            android:textSize="20sp" />
-
-        <Button
             android:id="@+id/vaccin_btn_VaccinInfoActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_marginLeft="150dp"
             android:text="접종설정"
+            android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
             android:textSize="20sp" />
 
