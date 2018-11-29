@@ -192,7 +192,13 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 DatePickerDialog dig = new DatePickerDialog(AllergyActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        occurrenceDate_tv.setText(year + "-" + (month + 1) + "-" + day);
+                        String dayStr;
+                        if(day < 10)
+                            dayStr = "0"+ day;
+                        else
+                            dayStr = Integer.toString(day);
+
+                        occurrenceDate_tv.setText(year + "-" + (month + 1) + "-" + dayStr);
 
                     }
                 }, 2018, 11, 4);
@@ -208,6 +214,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList);
                 databaseReference.child("AllergyResult").child(result.getOccurrenceDate()).setValue(result);
                 Toast.makeText(AllergyActivity.this,"저장되었습니다.",Toast.LENGTH_SHORT).show();
+                InitializeWiget();
                 break;
 
             case R.id.foodIngredients1_btn_AllergyActivity:
@@ -260,6 +267,18 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         foodIngredients_btn[i].setVisibility(View.VISIBLE);
         foodIngredients_btn[i - 1].setVisibility(View.GONE);
         foodIngredients_et[i].setVisibility(View.VISIBLE);
+    }
+
+    public void InitializeWiget(){
+        foodIngredients_et[0].setVisibility(View.VISIBLE);
+        foodIngredients_btn[0].setVisibility(View.VISIBLE);
+        foodIngredients_et[0].setText("");
+        for(int i = 1; i < foodIngredients_et.length - 1; i++){
+            foodIngredients_et[i].setText("");
+            foodIngredients_btn[i].setVisibility(View.GONE);
+            foodIngredients_et[i].setVisibility(View.GONE);
+        }
+        foodIngredients_et[9].setVisibility(View.GONE);
     }
 
 }

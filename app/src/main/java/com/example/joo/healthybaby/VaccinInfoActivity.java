@@ -25,7 +25,6 @@ public class VaccinInfoActivity extends AppCompatActivity {
     TextView vaccinInoculate_tv;
     TextView diseaseName_tv;
     TextView vaccinYesOrNo;
-    TextView notiYesOrNo_tv;
     Button vaccin_btn;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -50,7 +49,6 @@ public class VaccinInfoActivity extends AppCompatActivity {
         vaccinInoculate_tv = (TextView) findViewById(R.id.vaccinInoculate_tv_VaccinInfoActivity);
         diseaseName_tv = (TextView) findViewById(R.id.diseaseName_tv_VaccinInfoActivity);
         vaccinYesOrNo = (TextView) findViewById(R.id.vaccinYesOrNo_tv_VaccinInfoActivity);
-        notiYesOrNo_tv = (TextView) findViewById(R.id.notiYesOrNo_tv_VaccinInfoActivity);
         vaccin_btn = (Button) findViewById(R.id.vaccin_btn_VaccinInfoActivity);
 
         vaccinName_tv.setText(vaccinInfoDetail.getVaccinName());
@@ -103,7 +101,13 @@ public class VaccinInfoActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(VaccinInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, final int i, final int i1, final int i2) {
-                        InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(), i + "-" + (i1 + 1) + "-" + i2);
+                        String dayStr;
+                        if(i2 < 10)
+                            dayStr = "0" + i2;
+                        else
+                            dayStr = Integer.toString(i2);
+
+                        InoculateInfo info = new InoculateInfo(vaccinInfoDetail.getVaccinName(), i + "-" + (i1 + 1) + "-" + dayStr);
                         databaseReference.child("InoculateResult").child(info.getVaccinName()).setValue(info);
                     }
                 }, 2018, 11, 4);
