@@ -61,8 +61,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
          */
         recyclerViewHolder.tvVaccinName.setText(vaccinInfoArrayList.get(position).getVaccinName());
 
-        for(int i = 0; i < recyclerViewHolder.injection_iv.length - vaccinInfoArrayList.get(position).getInoculateDate().length; i++)
+        for(int i = 0; i < 5; i++) {
+            recyclerViewHolder.injection_iv[i].setImageResource(R.drawable.injection1);
+            recyclerViewHolder.injection_iv[i].setVisibility(View.VISIBLE);
+        }
+
+        for(int i = 0; i < (recyclerViewHolder.injection_iv.length - vaccinInfoArrayList.get(position).getInoculateDate().length); i++)
             recyclerViewHolder.injection_iv[i].setVisibility(View.INVISIBLE);
+
 
         databaseReference.child("InoculateResult").addValueEventListener(new ValueEventListener() {
             @Override
@@ -81,6 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+
     }
 
     @Override
