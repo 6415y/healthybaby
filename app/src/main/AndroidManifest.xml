@@ -27,7 +27,8 @@
         <activity android:name=".DietRecordActivity" />
         <activity android:name=".VaccinActivity" />
         <activity android:name=".VaccinDetailActivity" />
-        <activity android:name=".VaccinInfoActivity"></activity>
+        <activity android:name=".VaccinInfoActivity" />
+        <activity android:name=".AllergyDetailActivity"></activity>
     </application>
 
 </manifest>
