@@ -25,10 +25,10 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
 
         currentPaint = new Paint();
         currentPaint.setDither(true);
-        currentPaint.setStyle(Paint.Style.FILL);
+        currentPaint.setStyle(Paint.Style.STROKE);
         currentPaint.setStrokeJoin(Paint.Join.ROUND);
         currentPaint.setStrokeCap(Paint.Cap.ROUND);
-        currentPaint.setStrokeWidth(2);
+        currentPaint.setStrokeWidth(7);
     }
 
     @Override
