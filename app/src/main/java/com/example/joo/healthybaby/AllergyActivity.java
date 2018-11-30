@@ -2,15 +2,18 @@ package com.example.joo.healthybaby;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +30,7 @@ import java.util.List;
  *
  *
  * */
-public class AllergyActivity extends AppCompatActivity implements View.OnClickListener {
+public class AllergyActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
 
     ImageView babyHead_iv;
     ImageView babyBody_iv;
@@ -46,7 +49,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
     Button[] foodIngredients_btn = new Button[9];
     Button save_btn;
+    Button watch_btn;
 
+    double XValue;
+    double YValue;
 
     private String[] occurrenceArea_str;
     private int position;
@@ -121,6 +127,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         save_btn = (Button) findViewById(R.id.save_btn_AllergyActivity);
+        watch_btn = (Button) findViewById(R.id.watch_btn_AllergyActivity);
 
         for (int i = 1; i < foodIngredients_et.length; i++)
             foodIngredients_et[i].setVisibility(View.GONE);
@@ -131,14 +138,16 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         }
         foodIngredients_btn[0].setOnClickListener(this);
 
-        babyHead_iv.setOnClickListener(this);
-        babyBody_iv.setOnClickListener(this);
-        babyLeftHand_iv.setOnClickListener(this);
-        babyRightHand_iv.setOnClickListener(this);
-        babyLeftLeg_iv.setOnClickListener(this);
-        babyRightLeg_iv.setOnClickListener(this);
+        babyHead_iv.setOnTouchListener(this);
+        babyBody_iv.setOnTouchListener(this);
+        babyLeftHand_iv.setOnTouchListener(this);
+        babyRightHand_iv.setOnTouchListener(this);
+        babyLeftLeg_iv.setOnTouchListener(this);
+        babyRightLeg_iv.setOnTouchListener(this);
+
         occurrenceDate_tv.setOnClickListener(this);
         save_btn.setOnClickListener(this);
+        watch_btn.setOnClickListener(this);
 
     }
 
@@ -164,37 +173,13 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.baby_head_iv_AllergyActivity:
-                occurrenceArea_str = new String[]{"얼굴", "목"};
-                break;
-
-            case R.id.baby_body_iv_AllergyActivity:
-                occurrenceArea_str = new String[]{"왼쪽가슴", "오른쪽가슴", "배", "등"};
-                break;
-
-            case R.id.baby_lefthand_iv_AllergyActivity:
-                occurrenceArea_str = new String[]{"상박", "하박"};
-                break;
-
-            case R.id.baby_righthand_iv_AllergyActivity:
-                occurrenceArea_str = new String[]{"상박", "하박"};
-                break;
-
-            case R.id.baby_leftleg_iv_AllergyActivity:
-                occurrenceArea_str = new String[]{"허벅지", "종아리"};
-                break;
-
-            case R.id.baby_rightleg_iv_AllergyActivity:
-                occurrenceArea_str = new String[]{"허벅지", "종아리"};
-                break;
-
             case R.id.occurrenceDate_tv_AllergyActivity:
                 DatePickerDialog dig = new DatePickerDialog(AllergyActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         String dayStr;
-                        if(day < 10)
-                            dayStr = "0"+ day;
+                        if (day < 10)
+                            dayStr = "0" + day;
                         else
                             dayStr = Integer.toString(day);
 
@@ -211,10 +196,15 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 for (int i = 0; i < foodIngredientsPosition + 1; i++)
                     foodIngerdientList.add(foodIngredients_et[i].getText().toString());
 
-                AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList);
+                AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList, XValue, YValue);
                 databaseReference.child("AllergyResult").child(result.getOccurrenceDate()).setValue(result);
-                Toast.makeText(AllergyActivity.this,"저장되었습니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AllergyActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
                 InitializeWiget();
+                break;
+
+            case R.id.watch_btn_AllergyActivity:
+                Intent intent = new Intent(AllergyActivity.this, AllergyDetailActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.foodIngredients1_btn_AllergyActivity:
@@ -256,10 +246,6 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             default:
                 break;
         }
-        if (view.getId() == R.id.baby_head_iv_AllergyActivity || view.getId() == R.id.baby_body_iv_AllergyActivity ||
-                view.getId() == R.id.baby_lefthand_iv_AllergyActivity || view.getId() == R.id.baby_righthand_iv_AllergyActivity ||
-                view.getId() == R.id.baby_leftleg_iv_AllergyActivity || view.getId() == R.id.baby_leftleg_iv_AllergyActivity)
-            ShowChoiceDialog();
     }
 
     public void WidgetSetInvisible(int i) {
@@ -269,11 +255,11 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         foodIngredients_et[i].setVisibility(View.VISIBLE);
     }
 
-    public void InitializeWiget(){
+    public void InitializeWiget() {
         foodIngredients_et[0].setVisibility(View.VISIBLE);
         foodIngredients_btn[0].setVisibility(View.VISIBLE);
         foodIngredients_et[0].setText("");
-        for(int i = 1; i < foodIngredients_et.length - 1; i++){
+        for (int i = 1; i < foodIngredients_et.length - 1; i++) {
             foodIngredients_et[i].setText("");
             foodIngredients_btn[i].setVisibility(View.GONE);
             foodIngredients_et[i].setVisibility(View.GONE);
@@ -281,4 +267,39 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         foodIngredients_et[9].setVisibility(View.GONE);
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            XValue = motionEvent.getX();
+            YValue = motionEvent.getY();
+            Toast.makeText(AllergyActivity.this, "X : " + motionEvent.getX() + ", Y : " + motionEvent.getY(), Toast.LENGTH_SHORT).show();
+            switch (view.getId()) {
+                case R.id.baby_head_iv_AllergyActivity:
+                    occurrenceArea_str = new String[]{"얼굴", "목"};
+                    break;
+
+                case R.id.baby_body_iv_AllergyActivity:
+                    occurrenceArea_str = new String[]{"왼쪽가슴", "오른쪽가슴", "배", "등"};
+                    break;
+
+                case R.id.baby_lefthand_iv_AllergyActivity:
+                    occurrenceArea_str = new String[]{"상박(왼팔)", "하박(왼팔)"};
+                    break;
+
+                case R.id.baby_righthand_iv_AllergyActivity:
+                    occurrenceArea_str = new String[]{"상박(오른팔)", "하박(오른팔)"};
+                    break;
+
+                case R.id.baby_leftleg_iv_AllergyActivity:
+                    occurrenceArea_str = new String[]{"허벅지(왼쪽다리)", "종아리(왼쪽다리)"};
+                    break;
+
+                case R.id.baby_rightleg_iv_AllergyActivity:
+                    occurrenceArea_str = new String[]{"허벅지(오른쪽다리)", "종아리(오른쪽다리)"};
+                    break;
+            }
+            ShowChoiceDialog();
+        }
+        return false;
+    }
 }
