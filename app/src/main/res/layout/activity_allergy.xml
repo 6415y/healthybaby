@@ -82,19 +82,19 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_AllergyActivity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:id="@+id/linearLayout_AllergyActivity">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:layout_weight="1.9"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -102,7 +102,25 @@
                             android:layout_margin="20dp"
                             android:gravity="center"
                             android:text="발생부위"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:layout_weight="1.9"/>
+                        <TextView
+                            android:id="@+id/occurrenceArea_tv_AllergyActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:gravity="center"
+                            android:text="이미지에서 선택"
+                            android:textSize="20sp"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -110,7 +128,48 @@
                             android:layout_margin="20dp"
                             android:gravity="center"
                             android:text="발생날짜"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:layout_weight="1.9"
+                            android:layout_gravity="center"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/occurrenceDate_tv_AllergyActivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginBottom="5dp"
+                                android:hint="터치"
+                                android:textSize="20sp" />
+
+                            <Spinner
+                                android:id="@+id/occurrenceDate_sp_AllergyActivity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:entries="@array/Time" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -118,15 +177,16 @@
                             android:layout_margin="20dp"
                             android:gravity="center"
                             android:text="강도"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:layout_weight="1.9"/>
 
-                        <TextView
+                        <Spinner
+                            android:id="@+id/allergyIntensity_sp_AllergyActivity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="20dp"
-                            android:gravity="center"
-                            android:text="재료"
-                            android:textSize="20sp" />
+                            android:entries="@array/Intensity"
+                            android:layout_weight="1"/>
 
                     </LinearLayout>
 
@@ -135,342 +195,313 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/occurrenceArea_tv_AllergyActivity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="20dp"
                             android:gravity="center"
-                            android:text="이미지에서 선택"
-                            android:textSize="20sp" />
+                            android:text="재료"
+                            android:textSize="20sp"
+                            android:layout_weight="1.9"
+                            android:layout_gravity="center"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/occurrenceDate_tv_AllergyActivity"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_weight="1.4"
-                                android:gravity="center"
-                                android:hint="터치"
-                                android:textSize="15sp" />
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:orientation="horizontal">
 
-                            <Spinner
-                                android:id="@+id/occurrenceDate_sp_AllergyActivity"
+                                <EditText
+                                    android:id="@+id/foodIngredients1_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="계란"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients1_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_weight="1"
-                                android:entries="@array/Time" />
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients2_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="돼지고기"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients2_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients3_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="오이"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients3_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients4_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="밀가루"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients4_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients5_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="쪽파"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients5_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients6_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="방어"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients6_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients7_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="마늘"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients7_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients8_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="양파"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients8_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients9_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:hint="파"
+                                    android:textSize="20sp" />
+
+                                <Button
+                                    android:id="@+id/foodIngredients9_btn_AllergyActivity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="1.3"
+                                    android:text="+" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/foodIngredients10_et_AllergyActivity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginTop="12dp"
+                                    android:gravity="center"
+                                    android:hint="소고기"
+                                    android:textSize="20sp" />
+
+                            </LinearLayout>
                         </LinearLayout>
-
-                        <Spinner
-                            android:id="@+id/allergyIntensity_sp_AllergyActivity"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:entries="@array/Intensity" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients1_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="계란"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients1_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients2_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="돼지고기"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients2_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients3_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="오이"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients3_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients4_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="밀가루"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients4_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients5_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="쪽파"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients5_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/foodIngredients6_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="방어"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients6_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients7_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="마늘"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients7_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients8_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="양파"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients8_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/foodIngredients9_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:hint="파"
-                                android:textSize="20sp" />
-
-                            <Button
-                                android:id="@+id/foodIngredients9_btn_AllergyActivity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1.3"
-                                android:text="+" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/foodIngredients10_et_AllergyActivity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginTop="12dp"
-                                android:gravity="center"
-                                android:hint="소고기"
-                                android:textSize="20sp" />
-
-                        </LinearLayout>
-
 
                     </LinearLayout>
                 </LinearLayout>
