@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="식단 기록" />
+                android:text="알러지 기록" />
         </LinearLayout>
 
         <LinearLayout

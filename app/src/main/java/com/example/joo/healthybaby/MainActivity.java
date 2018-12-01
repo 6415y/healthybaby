@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         dietbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DietRecordActivity.class);
+                Intent intent = new Intent(MainActivity.this, AllergyActivity.class);
                 startActivity(intent);
             }
         });
