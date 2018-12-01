@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView babyface;//애기 얼굴 이미지뷰
     TextView babyprofile;//애기 프로필 텍뷰
-    Button chgprobtn;//프로필수정버튼
+    TextView chgprobtn;//프로필수정버튼
     public final int REQ_CODE_SELECT_IMAGE = 100;
     String babysex;
     int biryear, birmonth, birday;
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         //위젯들 연결
         growthbtn = (TextView) findViewById(R.id.growthbtn);//발육기록 버튼
-        chgprobtn = (Button) findViewById(R.id.chgprobtn);//프로필 변경버튼
+        chgprobtn = (TextView) findViewById(R.id.chgprobtn);//프로필 변경버튼
         //dietbtn = (Button) findViewById(R.id.dietbtn);//식단 기록 버튼
         allergybtn = (TextView) findViewById(R.id.allergybtn);//알러지 기록 버튼
         vaccinbtn = (TextView) findViewById(R.id.vaccinbtn);//예방 접종 버튼
