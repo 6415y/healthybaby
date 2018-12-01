@@ -193,8 +193,26 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.save_btn_AllergyActivity:
                 List<String> foodIngerdientList = new ArrayList<String>();
 
-                for (int i = 0; i < foodIngredientsPosition + 1; i++)
-                    foodIngerdientList.add(foodIngredients_et[i].getText().toString());
+                if(occurrenceArea_tv.getText().toString().equals("") || occurrenceDate_tv.getText().toString().equals("")
+                        || foodIngredients_et[0].getText().toString().equals("")){
+                    AlertDialog.Builder digbuild = new AlertDialog.Builder(AllergyActivity.this);
+                    digbuild.setTitle("에러");
+                    digbuild.setMessage("필수 정보(발생부위, 발생일자, 재료)가 입력되지 않았습니다. 다시한번 확인해 주세요.");
+                    digbuild.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    digbuild.show();
+                    break;
+                }
+
+                for (int i = 0; i < foodIngredientsPosition; i++)
+                    if(!foodIngredients_et[i].getText().toString().equals(""))
+                        foodIngerdientList.add(foodIngredients_et[i].getText().toString() + ", ");
+                if(!foodIngredients_et[foodIngredientsPosition].getText().toString().equals(""))
+                    foodIngerdientList.add(foodIngredients_et[foodIngredientsPosition].getText().toString());
 
                 AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList, XValue, YValue);
                 databaseReference.child("AllergyResult").child(result.getOccurrenceDate()).setValue(result);
@@ -240,6 +258,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.foodIngredients9_btn_AllergyActivity:
+                foodIngredientsPosition = 9;
                 foodIngredients_btn[8].setVisibility(View.GONE);
                 foodIngredients_et[9].setVisibility(View.VISIBLE);
                 break;
