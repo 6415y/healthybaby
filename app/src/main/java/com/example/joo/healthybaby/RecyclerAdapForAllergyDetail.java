@@ -29,7 +29,7 @@ public class RecyclerAdapForAllergyDetail extends RecyclerView.Adapter<RecyclerV
 
         recyclerViewHolder.tvOccurrenceDate.setText(allergyResultsList.get(position).getOccurrenceDate());
         for(String temp : allergyResultsList.get(position).getFoodIngredients()){
-            str = temp + str;
+            str = str + temp;
         }
         recyclerViewHolder.tvFoodIngredients.setText(str);
     }
