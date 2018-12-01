@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.joo.healthybaby.MainActivity">
+
 
     <LinearLayout
         android:id="@+id/mainlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
+
             <ImageView
                 android:id="@+id/mainbaby"
                 android:layout_width="0dp"
@@ -23,12 +26,14 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:src="@drawable/testbaby" />
+
             <TextView
                 android:id="@+id/babyprofile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="프로필을 수정해 주세요." />
+
             <Button
                 android:id="@+id/chgprobtn"
                 android:layout_width="0dp"
@@ -37,46 +42,52 @@
                 android:text="프로필\n수정" />
         </LinearLayout>
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="3">
 
-            <Button
-                android:id="@+id/growthbtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="발육 성장체크" />
+            <TableRow
+                android:layout_weight = "1">
+                <TextView
+                    android:background="#f1b9c7"
+                    android:id="@+id/growthbtn"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="발육 성장체크"/>
+                <TextView
+                    android:background="#f1b9c7"
+                    android:id="@+id/allergybtn"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="식단 기록" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/dietbtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="식단 기록" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/vaccinbtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="예방 접종" />
-
-            <Button
-                android:id="@+id/totalreportbtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="종합 리포트" />
-        </LinearLayout>
+            <TableRow
+                android:layout_weight = "1">
+                <TextView
+                    android:background="#f1b9c7"
+                    android:id="@+id/vaccinbtn"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="예방 접종" />
+                <TextView
+                    android:background="#f1b9c7"
+                    android:id="@+id/totalreportbtn"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="종합 리포트" />
+            </TableRow>
+        </TableLayout>
 
 
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

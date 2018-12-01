@@ -544,7 +544,7 @@ public class GrowthActivity extends AppCompatActivity {
                     } else {
                         checktext.setText("아이가 또래들보다 키가" + (int) ((1 - height / mean) * 100) + "%만큼 작습니다.");
                     }
-                    leftimage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
+                    leftimage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                     rightimage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, (float) (height / mean) * 10));
 
                 } else {//여아의 신장
@@ -554,7 +554,7 @@ public class GrowthActivity extends AppCompatActivity {
                     } else {
                         checktext.setText("아이가 또래들보다 키가" + (int) ((1 - height / mean) * 100) + "%만큼 작습니다.");
                     }
-                    leftimage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
+                    leftimage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                     rightimage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, (float) (height / mean) * 10));
 
                 }
