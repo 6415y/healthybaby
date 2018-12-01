@@ -40,6 +40,9 @@ public class AllergyDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allergy_detail);
 
+        /*
+         * activity를 구성하는 view들 초기화
+         */
         babyHead_iv = (CustomImageView) findViewById(R.id.baby_head_iv_AllergyDetailActivity);
         babyBody_iv = (CustomImageView) findViewById(R.id.baby_body_iv_AllergyDetailActivity);
         babyLeftHand_iv = (CustomImageView) findViewById(R.id.baby_lefthand_iv_AllergyDetailActivity);
@@ -63,14 +66,15 @@ public class AllergyDetailActivity extends AppCompatActivity {
         ItemClickSupport.addTo(mRecyclerView, R.id.recyclerView_AllergyDetailActivity).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, final int position, View v) {
+                /*
+                 * RecyclerView의 아이템들이 클릭될때마다 그려놨던 canvas들을 지움
+                 */
                 CanvasClear(babyHead_iv);
                 CanvasClear(babyBody_iv);
                 CanvasClear(babyLeftHand_iv);
                 CanvasClear(babyRightHand_iv);
                 CanvasClear(babyLeftLeg_iv);
                 CanvasClear(babyRightLeg_iv);
-
-                adapter.allergyResultsList.get(position).getOccurrenceDate();
 
                 databaseReference.child("AllergyResult").addValueEventListener(new ValueEventListener() {
                     @Override
@@ -133,6 +137,9 @@ public class AllergyDetailActivity extends AppCompatActivity {
                         allergyResultArrayList.add(result);
                     }
                 }
+                /*
+                 * RecyclerView 갱신
+                 */
                 adapter.notifyDataSetChanged();
             }
 
@@ -143,6 +150,14 @@ public class AllergyDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * DrawCircleOnImgView(CustomImageView imgVIew, AllergyResult result)
+     * @param imgVIew
+     * @param result
+     *
+     * 알러지의 강도에 따라 색상을 지정해주고
+     * CustomImgView에 있는 canvas를 사용하여 원을 그림
+     */
     public void DrawCircleOnImgView(CustomImageView imgVIew, AllergyResult result) {
         imgVIew.XVlaue = (float) result.getXValue();
         imgVIew.YValue = (float) result.getYValue();
@@ -158,6 +173,12 @@ public class AllergyDetailActivity extends AppCompatActivity {
         imgVIew.drawCircle = true;
     }
 
+    /**
+     * CanvasClear(CustomImageView img)
+     * @param img
+     *
+     * 기존에 CustomImgView에 그려진 원 그림 초기화
+     */
     public void CanvasClear(CustomImageView img) {
         img.invalidate();
         img.drawCircle = false;

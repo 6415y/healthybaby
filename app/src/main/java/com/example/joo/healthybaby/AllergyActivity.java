@@ -24,12 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * 알러지 기록 액티비티 입니다.
- *
- *
- *
- * */
+
 public class AllergyActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
 
     ImageView babyHead_iv;
@@ -68,6 +63,9 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allergy);
 
+        /*
+         * activity를 구성하는 view들 초기화
+         */
         babyHead_iv = (ImageView) findViewById(R.id.baby_head_iv_AllergyActivity);
         babyBody_iv = (ImageView) findViewById(R.id.baby_body_iv_AllergyActivity);
         babyLeftHand_iv = (ImageView) findViewById(R.id.baby_lefthand_iv_AllergyActivity);
@@ -129,6 +127,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         save_btn = (Button) findViewById(R.id.save_btn_AllergyActivity);
         watch_btn = (Button) findViewById(R.id.watch_btn_AllergyActivity);
 
+        /*
+         * 재료를 입력받는 editText및 버튼 GONE 설정(edit : 1~9, button : 1~8까지)
+         * 및 ClickListener 등록
+         */
         for (int i = 1; i < foodIngredients_et.length; i++)
             foodIngredients_et[i].setVisibility(View.GONE);
 
@@ -138,6 +140,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         }
         foodIngredients_btn[0].setOnClickListener(this);
 
+        /*
+         * imageview touchlistner 등록
+         * 및 textview, button clickListener 등록
+         */
         babyHead_iv.setOnTouchListener(this);
         babyBody_iv.setOnTouchListener(this);
         babyLeftHand_iv.setOnTouchListener(this);
@@ -151,6 +157,13 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
+
+    /**
+     * ShowChoiceDialog()
+     *
+     * 아기 이미지에서 특정 부위를 선택했을때 뜨는 dialog
+     * 상세 부위를 선택하게 하고 occurrenceAreat_tv에 저장
+     */
     public void ShowChoiceDialog() {
         AlertDialog.Builder dig = new AlertDialog.Builder(AllergyActivity.this);
         dig.setTitle("부위 선택");
@@ -267,6 +280,14 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * WidgetSetInvisible(int i)
+     * @param i
+     *
+     * 활성화된 edittext의 position을 저장
+     * 포지션에 해당하는 edittext, button 활성화(VISIBLE)
+     * 지난 포지션에 해당하는 button 비활성화(GONE)
+     */
     public void WidgetSetInvisible(int i) {
         foodIngredientsPosition = i;
         foodIngredients_btn[i].setVisibility(View.VISIBLE);
@@ -274,6 +295,11 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         foodIngredients_et[i].setVisibility(View.VISIBLE);
     }
 
+    /**
+     * InitializeWiget()
+     *
+     * 저장버튼을 눌렀을때 기존에 입력되있던 text값들 초기화
+     */
     public void InitializeWiget() {
         foodIngredients_et[0].setVisibility(View.VISIBLE);
         foodIngredients_btn[0].setVisibility(View.VISIBLE);
@@ -284,6 +310,9 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             foodIngredients_et[i].setVisibility(View.GONE);
         }
         foodIngredients_et[9].setVisibility(View.GONE);
+
+        occurrenceArea_tv.setText("");
+        occurrenceDate_tv.setText("");
     }
 
     @Override
