@@ -1,6 +1,7 @@
 package com.example.joo.healthybaby;
 
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -9,11 +10,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,11 +25,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,22 +48,26 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    Button growthbtn;
-    Button chgprobtn;
-    //  Button allergybtn;
-    Button dietbtn;
-    Button vaccinbtn;
-    Button totalreportbtn;
-    ImageView babyface;
-    TextView babyprofile;
-    final int REQ_CODE_SELECT_IMAGE = 100;
+
+    //테이블 레이아웃 안 4개의 텍스트뷰
+    TextView growthbtn;
+    TextView allergybtn;
+    TextView vaccinbtn;
+    TextView totalreportbtn;
+
+
+    ImageView babyface;//애기 얼굴 이미지뷰
+    TextView babyprofile;//애기 프로필 텍뷰
+    Button chgprobtn;//프로필수정버튼
+    public final int REQ_CODE_SELECT_IMAGE = 100;
     String babysex;
     int biryear, birmonth, birday;
-
+    public Uri mImageUri;
+    public StorageReference mStroageRef;
+    public DatabaseReference mDatabaseRef;
     @Override
     protected void onStart() {//첫 실행시 프로필 출력
         super.onStart();
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference profileput = database.getReference();
         profileput.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -73,20 +88,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
-       /* profileimage.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseRef=FirebaseDatabase.getInstance().getReference("uploads");
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                File path=dataSnapshot.getValue(File.class);
-                if(path!=null){
-                    Bitmap mbi=BitmapFactory.decodeFile(path.getAbsolutePath());
-                    babyface.setImageBitmap(mbi);
+                Uploadimage upload;
+                for(DataSnapshot post:dataSnapshot.getChildren()){
+                    upload=post.getValue(Uploadimage.class);
+                    if(upload!=null){
+                        Picasso.get().load(upload.getmImageUrl()).into(babyface);
+                    }
                 }
             }
 
@@ -94,21 +111,25 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //파베 stroage연결
+        final int PICK_IMAGE_REQUEST=1;
 
+       mStroageRef= FirebaseStorage.getInstance().getReference("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         //위젯들 연결
-        growthbtn = (Button) findViewById(R.id.growthbtn);//발육기록 버튼
+        growthbtn = (TextView) findViewById(R.id.growthbtn);//발육기록 버튼
         chgprobtn = (Button) findViewById(R.id.chgprobtn);//프로필 변경버튼
-        dietbtn = (Button) findViewById(R.id.dietbtn);//식단 기록 버튼
-        //  allergybtn = (Button) findViewById(R.id.allergybtn);//알러지 기록 버튼
-        vaccinbtn = (Button) findViewById(R.id.vaccinbtn);//예방 접종 버튼
-        totalreportbtn = (Button) findViewById(R.id.totalreportbtn);//종합 레포트 버튼
+        //dietbtn = (Button) findViewById(R.id.dietbtn);//식단 기록 버튼
+        allergybtn = (TextView) findViewById(R.id.allergybtn);//알러지 기록 버튼
+        vaccinbtn = (TextView) findViewById(R.id.vaccinbtn);//예방 접종 버튼
+        totalreportbtn = (TextView) findViewById(R.id.totalreportbtn);//종합 레포트 버튼
 
         //메인액티비티 위젯들
         //아이 얼굴이 저장된게 나오게...
@@ -120,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
         babyface.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQ_CODE_SELECT_IMAGE);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,PICK_IMAGE_REQUEST);
             }
         });
         //프로필 변경버튼 눌렀을 시 동작
@@ -203,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        /*
         //식단 기록버튼 눌렀을 시 동작
         dietbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+*/
         //예방 접종버튼 눌렀을 시 동작
         vaccinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-/*
+
         //알러지 기록버튼 눌렀을 시 동작
         allergybtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-*/
+
         //종합 기록버튼 눌렀을 시 동작
         totalreportbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,41 +263,54 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String getPath(Uri uri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
-
-        Cursor cursor = cursorLoader.loadInBackground();
-        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(index);
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1&&resultCode==RESULT_OK&&data !=null&&data.getData()!=null){
+            mImageUri=data.getData();
 
-        //결과코드 Toast.makeText(getBaseContext(), "resultCode : "+resultCode,Toast.LENGTH_SHORT).show();
+            uploadFile();
+        }
+    }
+    public String getFileExtension(Uri uri){
+        ContentResolver cR=getContentResolver();
+        MimeTypeMap mime =MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+    public void uploadFile(){
+        if (mImageUri !=null){
+            StorageReference fileReference=mStroageRef.child(getFileExtension(mImageUri));
+            fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {//성공시
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
 
-        if (requestCode == REQ_CODE_SELECT_IMAGE) {
-            if (resultCode == MainActivity.RESULT_OK) {
-                try {
-                    //이미지 데이터를 비트맵으로 받아온다.
-                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    //배치해놓은 ImageView에 set
-                    babyface.setImageBitmap(image_bitmap);
-
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference userpic = database.getReference();
-                    userpic.child("babyimg").setValue(getPath(data.getData()));
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+                                }
+                            },5000);
+                            Toast.makeText(MainActivity.this,"업로드 완료",Toast.LENGTH_SHORT).show();
+                            Uploadimage upload= new Uploadimage(taskSnapshot.getDownloadUrl().toString());
+                            mDatabaseRef.child("upload").setValue(upload);
+                            babyface.setImageURI(mImageUri);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {//실패시
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MainActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {//프로그래스바 표현
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double profress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                            //mProgressBar.
+                        }
+                    });
+        } else{
+            Toast.makeText(this,"파일선택안됨",Toast.LENGTH_SHORT).show();
         }
     }
 
