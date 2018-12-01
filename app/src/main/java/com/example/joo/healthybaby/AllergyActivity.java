@@ -272,7 +272,6 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             XValue = motionEvent.getX();
             YValue = motionEvent.getY();
-            Toast.makeText(AllergyActivity.this, "X : " + motionEvent.getX() + ", Y : " + motionEvent.getY(), Toast.LENGTH_SHORT).show();
             switch (view.getId()) {
                 case R.id.baby_head_iv_AllergyActivity:
                     occurrenceArea_str = new String[]{"얼굴", "목"};
