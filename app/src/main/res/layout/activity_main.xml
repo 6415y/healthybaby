@@ -78,7 +78,7 @@
                     android:layout_margin="1dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="식단 기록" />
+                    android:text="알러지 기록" />
             </TableRow>
             <TableRow
                 android:layout_weight = "1">

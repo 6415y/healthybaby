@@ -2,6 +2,13 @@ package com.example.joo.healthybaby;
 
 import java.util.List;
 
+
+/**
+ * AllergyResult class
+ * @author lolhi
+ *
+ * firebase에 저장 및 불러오기를 사용할때 필요한 class
+ */
 public class AllergyResult {
     private String occurrenceArea;
     private String occurrenceDate;

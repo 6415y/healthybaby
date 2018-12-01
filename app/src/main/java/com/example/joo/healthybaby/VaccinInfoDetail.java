@@ -2,12 +2,12 @@ package com.example.joo.healthybaby;
 
 import java.io.Serializable;
 
-/*
- *  public class VaccinInfoDetail implements Serializable{ ......
+/**
+ * VaccinInfoDetail class
+ * @author lolhi
  *
- *  백신의 정보를 가지는 class
+ * 백신의 정보를 가지는 class
  */
-
 public class VaccinInfoDetail implements Serializable{
     private String vaccinName;
     private String vaccinInfo;
