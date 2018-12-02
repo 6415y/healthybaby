@@ -9,43 +9,55 @@
 
 
     <LinearLayout
+        android:background="#df8ca7"
         android:id="@+id/mainlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TableLayout
+            android:background="#df8ca7"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/mainbaby"
-                android:layout_width="0dp"
+            <TableRow
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:src="@drawable/testbaby" />
+                android:layout_weight="1.5">
 
-            <TextView
-                android:id="@+id/babyprofile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="프로필을 수정해 주세요." />
+                <ImageView
+                    android:id="@+id/mainbaby"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/testbaby" />
 
-            <Button
-                android:id="@+id/chgprobtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="프로필\n수정" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/babyprofile"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#f1b9c7"
+                    android:text="프로필을 수정해 주세요." />
 
+                <TextView
+                    android:id="@+id/chgprobtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="#f1b9c7"
+                    android:gravity="center"
+                    android:text="프로필\n수정" />
+            </TableRow>
+        </TableLayout>
         <TableLayout
+            android:background="#df8ca7"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="5">
 
             <TableRow
                 android:layout_weight = "1">
@@ -56,17 +68,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_margin="1dp"
                     android:text="발육 성장체크"/>
                 <TextView
                     android:background="#f1b9c7"
                     android:id="@+id/allergybtn"
                     android:gravity="center"
                     android:layout_width="0dp"
+                    android:layout_margin="1dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="알러지 기록" />
             </TableRow>
-
             <TableRow
                 android:layout_weight = "1">
                 <TextView
@@ -74,6 +87,7 @@
                     android:id="@+id/vaccinbtn"
                     android:gravity="center"
                     android:layout_width="0dp"
+                    android:layout_margin="1dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="예방 접종" />
@@ -82,6 +96,7 @@
                     android:id="@+id/totalreportbtn"
                     android:gravity="center"
                     android:layout_width="0dp"
+                    android:layout_margin="1dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="종합 리포트" />
