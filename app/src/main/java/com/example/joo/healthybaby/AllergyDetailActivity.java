@@ -8,11 +8,13 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -131,10 +133,12 @@ public class AllergyDetailActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AllergyResult result;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    result = snapshot.getValue(AllergyResult.class);
+                    if(!snapshot.getKey().equals("FoodResult")) {
+                        result = snapshot.getValue(AllergyResult.class);
 
-                    if (result != null) {
-                        allergyResultArrayList.add(result);
+                        if (result != null) {
+                            allergyResultArrayList.add(result);
+                        }
                     }
                 }
                 /*

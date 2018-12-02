@@ -205,6 +205,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.save_btn_AllergyActivity:
                 List<String> foodIngerdientList = new ArrayList<String>();
+                List<String> foodList = new ArrayList<String>();
 
                 if(occurrenceArea_tv.getText().toString().equals("") || occurrenceDate_tv.getText().toString().equals("")
                         || foodIngredients_et[0].getText().toString().equals("")){
@@ -222,10 +223,17 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 for (int i = 0; i < foodIngredientsPosition; i++)
-                    if(!foodIngredients_et[i].getText().toString().equals(""))
+                    if(!foodIngredients_et[i].getText().toString().equals("")) {
                         foodIngerdientList.add(foodIngredients_et[i].getText().toString() + ", ");
-                if(!foodIngredients_et[foodIngredientsPosition].getText().toString().equals(""))
+                        foodList.add(foodIngredients_et[i].getText().toString());
+                    }
+                if(!foodIngredients_et[foodIngredientsPosition].getText().toString().equals("")) {
                     foodIngerdientList.add(foodIngredients_et[foodIngredientsPosition].getText().toString());
+                    foodList.add(foodIngredients_et[foodIngredientsPosition].getText().toString());
+                }
+
+                FoodResult foodResult = new FoodResult(foodList);
+                databaseReference.child("AllergyResult").child("FoodResult").setValue(foodResult);
 
                 AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList, XValue, YValue);
                 databaseReference.child("AllergyResult").child(result.getOccurrenceDate()).setValue(result);
