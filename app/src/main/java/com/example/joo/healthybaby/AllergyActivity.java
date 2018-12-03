@@ -3,6 +3,10 @@ package com.example.joo.healthybaby;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -328,6 +332,26 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             XValue = motionEvent.getX();
             YValue = motionEvent.getY();
+
+            /*
+             * ImageView를 가져와 bitmap으로 변환
+             * 변환된 bitmap의 pixel정보를 가져와 색상이 255,255,255일때
+             * Toast message를 띄우고 return
+             */
+            ImageView img = (ImageView)view;
+            BitmapDrawable drawable = (BitmapDrawable)img.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+
+            int argbValue = bitmap.getPixel((int)XValue,(int)YValue);
+            int r = Color.red(argbValue);
+            int g = Color.green(argbValue);
+            int b = Color.blue(argbValue);
+
+            if(r == 255 && g== 255 && b== 255){
+                Toast.makeText(AllergyActivity.this,"알러지 발생부분을 정확히 선택해주세요.",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             switch (view.getId()) {
                 case R.id.baby_head_iv_AllergyActivity:
                     occurrenceArea_str = new String[]{"얼굴", "목"};
