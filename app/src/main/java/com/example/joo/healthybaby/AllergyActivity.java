@@ -347,7 +347,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             int g = Color.green(argbValue);
             int b = Color.blue(argbValue);
 
-            if(r == 255 && g== 255 && b== 255){
+            if(r == 0 && g== 0 && b== 0){
                 Toast.makeText(AllergyActivity.this,"알러지 발생부분을 정확히 선택해주세요.",Toast.LENGTH_SHORT).show();
                 return false;
             }

@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/baby_head_iv_AllergyDetailActivity"
-                        android:layout_marginTop="1dp"
+                        android:layout_marginTop="2dp"
                         android:layout_toStartOf="@+id/baby_body_iv_AllergyDetailActivity"
                         app:srcCompat="@drawable/babyhand" />
 
@@ -122,8 +122,9 @@
                         android:id="@+id/baby_righthand_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/baby_lefthand_iv_AllergyDetailActivity"
+                        android:layout_below="@+id/baby_head_iv_AllergyDetailActivity"
                         android:layout_toEndOf="@+id/baby_body_iv_AllergyDetailActivity"
+                        android:layout_marginTop="4dp"
                         app:srcCompat="@drawable/babyhand2" />
 
                     <com.example.joo.healthybaby.CustomImageView
@@ -132,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/baby_body_iv_AllergyDetailActivity"
-                        android:layout_marginStart="131dp"
+                        android:layout_marginStart="133dp"
                         app:srcCompat="@drawable/babyleg" />
 
                     <com.example.joo.healthybaby.CustomImageView
@@ -141,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_below="@+id/baby_body_iv_AllergyDetailActivity"
-                        android:layout_marginEnd="133dp"
+                        android:layout_marginEnd="135dp"
                         app:srcCompat="@drawable/babyleg2" />
 
                 </RelativeLayout>
