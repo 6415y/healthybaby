@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AllergyDetailActivity">
+    tools:context="com.example.james.healthybaby.AllergyDetailActivity">
 
 
     <LinearLayout
@@ -92,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.example.joo.healthybaby.CustomImageView
+                    <com.example.james.healthybaby.CustomImageView
                         android:id="@+id/baby_head_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                         android:layout_marginTop="37dp"
                         app:srcCompat="@drawable/babyhead" />
 
-                    <com.example.joo.healthybaby.CustomImageView
+                    <com.example.james.healthybaby.CustomImageView
                         android:id="@+id/baby_body_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                         android:layout_centerHorizontal="true"
                         app:srcCompat="@drawable/babybody" />
 
-                    <com.example.joo.healthybaby.CustomImageView
+                    <com.example.james.healthybaby.CustomImageView
                         android:id="@+id/baby_lefthand_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                         android:layout_toStartOf="@+id/baby_body_iv_AllergyDetailActivity"
                         app:srcCompat="@drawable/babyhand" />
 
-                    <com.example.joo.healthybaby.CustomImageView
+                    <com.example.james.healthybaby.CustomImageView
                         android:id="@+id/baby_righthand_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                         android:layout_marginTop="4dp"
                         app:srcCompat="@drawable/babyhand2" />
 
-                    <com.example.joo.healthybaby.CustomImageView
+                    <com.example.james.healthybaby.CustomImageView
                         android:id="@+id/baby_leftleg_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                         android:layout_marginStart="133dp"
                         app:srcCompat="@drawable/babyleg" />
 
-                    <com.example.joo.healthybaby.CustomImageView
+                    <com.example.james.healthybaby.CustomImageView
                         android:id="@+id/baby_rightleg_iv_AllergyDetailActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

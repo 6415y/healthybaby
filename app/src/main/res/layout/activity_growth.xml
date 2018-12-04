@@ -7,13 +7,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.joo.healthybaby.GrowthActivity">
+    tools:context="com.example.james.healthybaby.GrowthActivity">
 
 
     <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            />
+
 
         <EditText
             android:id="@+id/growthheight"
@@ -27,6 +36,12 @@
             android:layout_height="wrap_content"
             android:text="cm" />
 
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            />
+
+
         <EditText
             android:id="@+id/growthweight"
             android:layout_width="wrap_content"
@@ -34,16 +49,30 @@
             android:hint="체중입력"
             android:inputType="numberDecimal" />
 
+
+
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="kg" />
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            />
+
         <Button
+            android:background="@drawable/buttonstyle"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:id="@+id/growthsavebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력" />
+            android:text="입력"
+            android:layout_marginRight="10dp"/>
+
+
+
     </LinearLayout>
 
     <DatePicker
@@ -52,50 +81,91 @@
         android:layout_height="wrap_content"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"></DatePicker>
-    <TextView
-        android:id="@+id/dataview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:gravity="center"
-        android:id="@+id/checktext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:gravity="center"
-            android:text="내 아이"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <ImageView
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:gravity="center"
-            android:text="또래아이"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/angel" />
+        <LinearLayout
+            android:layout_marginRight="10dp"
+            android:background="@drawable/speech"
+            android:layout_weight="5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="7dp"
+                android:textStyle="italic"
+                android:text="데이터가 없습니다."
+                android:gravity="center"
+                android:id="@+id/dataview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="데이터가 없습니다."
+                android:textStyle="italic"
+                android:id="@+id/checktext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+        </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/leftimage"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/growthbaby2" />
+            android:layout_height="wrap_content"
+            android:layout_weight="10">
 
-        <ImageView
-            android:id="@+id/rightimage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/leftimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/growthbaby2" />
+
+            <ImageView
+                android:id="@+id/rightimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/growthbaby2" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/growthbaby2" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="내 아이" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="또래아이" />
+        </LinearLayout>
+
+
     </LinearLayout>
+
+
 </LinearLayout>

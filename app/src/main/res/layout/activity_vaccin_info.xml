@@ -144,6 +144,8 @@
     </android.support.v7.widget.CardView>
 
     <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -153,9 +155,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="150dp"
-            android:gravity="center_horizontal"
-            android:text="접종설정"
+            android:background="@drawable/buttonstyle"
+            android:layout_marginRight="30dp"
+            android:textColor="#ffffff"
+            android:text="날짜기록"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/vaccin2_btn_VaccinInfoActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/buttonstyle"
+            android:textColor="#ffffff"
+            android:text="저장하기"
             android:textSize="20sp" />
 
     </LinearLayout>

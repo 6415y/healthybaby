@@ -1,108 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/graylight"
     android:orientation="vertical"
-    tools:context="com.example.joo.healthybaby.MainActivity">
-
-
-    <LinearLayout
-        android:background="#df8ca7"
-        android:id="@+id/mainlayout"
+    android:id="@+id/mainlayout"
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TableLayout
-            android:background="#df8ca7"
+        android:layout_height="385dp">
+        <LinearLayout
+            android:background="@drawable/gradientbackground"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TableRow
-                android:layout_height="match_parent"
-                android:layout_weight="1.5">
+            android:layout_height="350dp"
+            android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/mainbaby"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/testbaby" />
 
+            <com.example.james.healthybaby.CircleImageView
+                android:id="@+id/mainbaby"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_marginTop="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/photocercle"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#ffffff"/>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
                 <TextView
-                    android:id="@+id/babyprofile"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:background="#f1b9c7"
-                    android:text="프로필을 수정해 주세요." />
+                    android:id="@+id/babyname"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wiliam Snoe"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="21sp"/>
 
-                <TextView
+                <ImageButton
                     android:id="@+id/chgprobtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:background="#f1b9c7"
-                    android:gravity="center"
-                    android:text="프로필\n수정" />
-            </TableRow>
-        </TableLayout>
-        <TableLayout
-            android:background="#df8ca7"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5">
-
-            <TableRow
-                android:layout_weight = "1">
-                <TextView
-                    android:background="#f1b9c7"
-                    android:id="@+id/growthbtn"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="1dp"
-                    android:text="발육 성장체크"/>
-                <TextView
-                    android:background="#f1b9c7"
-                    android:id="@+id/allergybtn"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_margin="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="알러지 기록" />
-            </TableRow>
-            <TableRow
-                android:layout_weight = "1">
-                <TextView
-                    android:background="#f1b9c7"
-                    android:id="@+id/vaccinbtn"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_margin="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="예방 접종" />
-                <TextView
-                    android:background="#f1b9c7"
-                    android:id="@+id/totalreportbtn"
-                    android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_margin="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="종합 리포트" />
-            </TableRow>
-        </TableLayout>
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/set"
+                    android:background="@drawable/buttonstyle2"/>
+            </LinearLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="400dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="275dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/babyprofile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="Age"
+                        android:textSize="20sp"
+                        />
+                    <TextView
+                        android:id="@+id/babyyear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/startblue"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Day"
+                        android:textSize="20sp"
+                        />
+                    <TextView
+                        android:id="@+id/babydateage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/startblue"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Month"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/babymonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/startblue"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    <TableLayout
+        android:background="@color/endblue"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <TableRow
+            android:layout_weight = "1">
+            <TextView
+                android:background="@color/graylight"
+                android:drawableTop="@drawable/growing"
+                android:textSize="20dp"
+                android:padding="20dp"
+                android:id="@+id/growthbtn"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:text="발육 성장체크" />
+
+
+            <TextView
+                android:background="@color/graylight"
+                android:drawableTop="@drawable/allergy"
+                android:textSize="20dp"
+                android:padding="20dp"
+                android:id="@+id/allergybtn"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_margin="1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="알러지 기록" />
+        </TableRow>
+        <TableRow
+            android:layout_weight = "1">
+            <TextView
+                android:background="@color/graylight"
+                android:drawableTop="@drawable/jusa"
+                android:textSize="20dp"
+                android:padding="20dp"
+                android:id="@+id/vaccinbtn"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_margin="1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="예방 접종" />
+            <TextView
+                android:background="@color/graylight"
+                android:drawableTop="@drawable/reports"
+                android:padding="20dp"
+                android:textSize="20dp"
+                android:id="@+id/totalreportbtn"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_margin="1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="종합 리포트" />
+        </TableRow>
+    </TableLayout>
+
+
+
 </LinearLayout>

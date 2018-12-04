@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "452441357833",
+    "firebase_url": "https://healthybaby-226e0.firebaseio.com",
+    "project_id": "healthybaby-226e0",
+    "storage_bucket": "healthybaby-226e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452441357833:android:f519133ecb1f628d",
+        "android_client_info": {
+          "package_name": "com.example.james.healthybaby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452441357833-7ivldc0enoc22onp1ljm30rdcd34h55i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.james.healthybaby",
+            "certificate_hash": "c6bc843b6b272b89111a0afbc08a0575cc9384d7"
+          }
+        },
+        {
+          "client_id": "452441357833-qbbf1htnvn6o3njg045hqam9aaiknrmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVWuHidqk7Ave19G1TPhGe9N-ZlX2_h5Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452441357833-qbbf1htnvn6o3njg045hqam9aaiknrmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
