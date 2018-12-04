@@ -148,7 +148,7 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginRight="20dp"
                                 android:layout_marginBottom="5dp"
-                                android:hint="터치"
+                                android:hint="여기를 터치 해주세요"
                                 android:textSize="20sp" />
 
                             <Spinner
@@ -230,7 +230,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="계란"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -260,7 +260,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="돼지고기"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -290,7 +290,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="오이"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -320,7 +320,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="밀가루"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -351,7 +351,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="쪽파"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -380,7 +380,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="방어"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -410,7 +410,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="마늘"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -440,7 +440,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="양파"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -470,7 +470,7 @@
                                     android:layout_marginTop="12dp"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:hint="파"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                                 <Button
@@ -498,7 +498,7 @@
                                     android:layout_marginRight="5dp"
                                     android:layout_marginTop="12dp"
                                     android:gravity="center"
-                                    android:hint="소고기"
+                                    android:hint="텍스트 입력"
                                     android:textSize="20sp" />
 
                             </LinearLayout>

@@ -251,19 +251,18 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                                         }
                                     }
                                 }
-                            } else{
+                            } else {
                                 for (int i = 0; i < foodIngredientsPosition + 1; i++) {
                                     if (!foodIngredients_et[i].getText().toString().equals("")) {
                                         foodList.add(foodIngredients_et[i].getText().toString());
                                     }
 
                                 }
+                                result = new FoodResult(foodList);
                             }
-                            result = new FoodResult(foodList);
-
+                            databaseReference.child("AllergyResult").child("FoodResult").setValue(result);
+                            InitializeWiget();
                         }
-                        databaseReference.child("AllergyResult").child("FoodResult").setValue(result);
-                        InitializeWiget();
                     }
 
                     @Override
