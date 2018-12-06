@@ -148,7 +148,7 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginRight="20dp"
                                 android:layout_marginBottom="5dp"
-                                android:hint="여기를 터치 해주세요"
+                                android:hint="날짜를 선택해주세요."
                                 android:textSize="20sp" />
 
                             <Spinner
