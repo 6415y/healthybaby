@@ -126,20 +126,12 @@
             android:layout_weight="10">
 
             <ImageView
-                android:id="@+id/leftimage"
+                android:id="@+id/babyimage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@drawable/growthbaby2" />
-
-            <ImageView
-                android:id="@+id/rightimage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="centerInside"
-                android:src="@drawable/growthbaby2" />
+                android:src="@drawable/babyequal" />
         </LinearLayout>
 
         <LinearLayout

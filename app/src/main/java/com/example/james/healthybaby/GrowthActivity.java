@@ -35,7 +35,7 @@ public class GrowthActivity extends AppCompatActivity {
     Button gro_savebtn;//입력버튼
     TextView checktext;//아이크기비교 텍스트
     TextView dataview;//데이터 존재유무 텍스트
-    ImageView leftimage, rightimage;
+    ImageView babyimage;
 
 
     double[] heightmeanboy = {49.9,
@@ -508,8 +508,7 @@ public class GrowthActivity extends AppCompatActivity {
         gro_date = (DatePicker) findViewById(R.id.growthdatespin);//오늘날짜선택스피너
 
         gro_savebtn = (Button) findViewById(R.id.growthsavebtn);
-        leftimage = (ImageView) findViewById(R.id.leftimage);
-        rightimage = (ImageView) findViewById(R.id.rightimage);
+        babyimage = (ImageView) findViewById(R.id.babyimage);
         Intent intent = getIntent();
         final int year1 = intent.getExtras().getInt("year");//아이 생일 년 월 일
         final int month1 = intent.getExtras().getInt("month");
@@ -536,37 +535,23 @@ public class GrowthActivity extends AppCompatActivity {
                 uploadgrowthresult.child("heightresult").child(age.toString()).setValue(getheight);
                 uploadgrowthresult.child("weightresult").child(age.toString()).setValue(getweight);
 
-                LinearLayout.LayoutParams leftParam=(LinearLayout.LayoutParams) leftimage.getLayoutParams();
-                LinearLayout.LayoutParams rightParam=(LinearLayout.LayoutParams) rightimage.getLayoutParams();
                 if (babysex == "남자") {//남아의 신장
                     float mean = (float) heightmeanboy[(int) (age / 30)];//생후 일수로 또래아이 신장평균 구해옴
                     if (height / mean > 1) {
                         checktext.setText("아이가 또래들보다 키가" + (int) ((height / mean - 1) * 100) + "%만큼 큽니다.");
-                        rightParam.setMargins((int)((height/mean-1)*100),(int)((height/mean-1)*100),(int)((height/mean-1)*100),(int)((height/mean-1)*100));
-                        rightimage.setLayoutParams(rightParam);
-                        leftParam.setMargins(0,0,0,0);
-                        leftimage.setLayoutParams(leftParam);
+                        babyimage.setImageResource(R.drawable.babyleft);
                     } else {
                         checktext.setText("아이가 또래들보다 키가" + (int) ((1 - height / mean) * 100) + "%만큼 작습니다.");
-                        leftParam.setMargins((int)((1-height/mean)*100),(int)((1-height/mean)*100),(int)((1-height/mean)*100),(int)((1-height/mean)*100));
-                        leftimage.setLayoutParams(leftParam);
-                        rightParam.setMargins(0,0,0,0);
-                        rightimage.setLayoutParams(rightParam);
+                        babyimage.setImageResource(R.drawable.babyright);
                     }
                 } else {//여아의 신장
                     float mean = (float) heightmeangirl[(int) (age / 30)];//생후 일수로 또래아이 신장평균 구해옴
                     if (height / mean > 1) {
                         checktext.setText("아이가 또래들보다 키가" + (int) ((height / mean - 1) * 100) + "%만큼 큽니다.");
-                        rightParam.setMargins((int)((height/mean-1)*100),(int)((height/mean-1)*100),(int)((height/mean-1)*100),(int)((height/mean-1)*100));
-                        rightimage.setLayoutParams(rightParam);
-                        leftParam.setMargins(0,0,0,0);
-                        leftimage.setLayoutParams(leftParam);
+                        babyimage.setImageResource(R.drawable.babyleft);
                     } else {
                         checktext.setText("아이가 또래들보다 키가" + (int) ((1 - height / mean) * 100) + "%만큼 작습니다.");
-                        leftParam.setMargins((int)((1-height/mean)*100),(int)((1-height/mean)*100),(int)((1-height/mean)*100),(int)((1-height/mean)*100));
-                        leftimage.setLayoutParams(leftParam);
-                        rightParam.setMargins(0,0,0,0);
-                        rightimage.setLayoutParams(rightParam);
+                        babyimage.setImageResource(R.drawable.babyright);
                     }
                 }
 
