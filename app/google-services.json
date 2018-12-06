@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "452441357833",
-    "firebase_url": "https://healthybaby-226e0.firebaseio.com",
-    "project_id": "healthybaby-226e0",
-    "storage_bucket": "healthybaby-226e0.appspot.com"
+    "project_number": "435874016324",
+    "firebase_url": "https://healtybaby-bd71f.firebaseio.com",
+    "project_id": "healtybaby-bd71f",
+    "storage_bucket": "healtybaby-bd71f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:452441357833:android:f519133ecb1f628d",
+        "mobilesdk_app_id": "1:435874016324:android:f519133ecb1f628d",
         "android_client_info": {
           "package_name": "com.example.james.healthybaby"
         }
       },
       "oauth_client": [
         {
-          "client_id": "452441357833-7ivldc0enoc22onp1ljm30rdcd34h55i.apps.googleusercontent.com",
+          "client_id": "435874016324-sa0rl1n59n50s37c0cmb7q1icin99suk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.james.healthybaby",
-            "certificate_hash": "c6bc843b6b272b89111a0afbc08a0575cc9384d7"
+            "certificate_hash": "2c866de203e9a9134935a6c2e276e655efd51172"
           }
         },
         {
-          "client_id": "452441357833-qbbf1htnvn6o3njg045hqam9aaiknrmi.apps.googleusercontent.com",
+          "client_id": "435874016324-qls9uj0sdmofcg09jpcvofruh9lu65pp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCVWuHidqk7Ave19G1TPhGe9N-ZlX2_h5Q"
+          "current_key": "AIzaSyCsgu9OPCE-O_aqMiIsLPj-XNr4G9V3aP4"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "452441357833-qbbf1htnvn6o3njg045hqam9aaiknrmi.apps.googleusercontent.com",
+              "client_id": "435874016324-qls9uj0sdmofcg09jpcvofruh9lu65pp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
