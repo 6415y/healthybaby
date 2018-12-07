@@ -16,6 +16,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * RecyclerViewAdapter.java
+ * @author Jang Yongju
+ *
+ * VaccinActivity에서 쓰이는 RecycelrView를 위한 커스텀 어뎁터
+ */
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<VaccinInfo> vaccinInfoArrayList;

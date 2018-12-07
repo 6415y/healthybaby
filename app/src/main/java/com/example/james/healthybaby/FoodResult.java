@@ -3,8 +3,8 @@ package com.example.james.healthybaby;
 import java.util.List;
 
 /**
- * FoodIngredients class
- * @author lolhi
+ * FoodIngredients.java
+ * @author 장용주
  *
  * firebase에 음식 리스트 업로드 하기 위한 class
  */

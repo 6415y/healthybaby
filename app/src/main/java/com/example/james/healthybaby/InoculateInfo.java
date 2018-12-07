@@ -1,10 +1,10 @@
 package com.example.james.healthybaby;
 
 /**
- * InoculateInfo class
- * @author lolhi
+ * InoculateInfo.java
+ * @author 장용주
  *
- * firebase에 저장 및 불러오기를 사용할때 필요한 class
+ * firebase에 예방접종 내역을 저장 및 불러오기를 사용할때 필요한 class
  */
 public class InoculateInfo {
     private String vaccinName;

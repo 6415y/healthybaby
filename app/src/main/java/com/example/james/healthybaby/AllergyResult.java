@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * AllergyResult class
- * @author lolhi
+ * @author Jang Yongju
  *
  * firebase에 저장 및 불러오기를 사용할때 필요한 class
  */

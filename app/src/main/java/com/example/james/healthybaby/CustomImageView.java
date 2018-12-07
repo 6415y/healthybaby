@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * Allows to draw Circle on ImageView.
  *
  * @author Maciej Nux Jaros
- * @Custom lolhi
+ * @author Jang Yongju
  */
 
 public class CustomImageView extends android.support.v7.widget.AppCompatImageView {

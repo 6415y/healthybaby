@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 /**
  * VaccinInfoDetail class
- * @author lolhi
+ * @author 장용주
  *
- * 백신의 정보를 가지는 class
+ * VaccinDetailActivity에서 백신의 간략한 정보를 가지는 class
+ * intent로 VaccinInfoActivity로 넘기기 위해 Serializable implements
  */
 public class VaccinInfoDetail implements Serializable {
     private String vaccinName;

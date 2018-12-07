@@ -30,9 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AllergyActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
 
+    //객체선언
     ImageView babyHead_iv;
     ImageView babyBody_iv;
     ImageView babyLeftHand_iv;
@@ -52,15 +52,18 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
     Button save_btn;
     Button watch_btn;
 
+    // 이미지 터치 했을때 x,y값을 저장하기 위한 변수
     double XValue;
     double YValue;
 
+    // 기능 구현에 필요한 변수들
     private String[] occurrenceArea_str;
     private int position;
     private String time;
     private String intensity;
     private int foodIngredientsPosition;
 
+    //firebase를 사용하기 위한 변수
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
@@ -106,6 +109,13 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
         foodIngredients_btn[7] = (Button) findViewById(R.id.foodIngredients8_btn_AllergyActivity);
         foodIngredients_btn[8] = (Button) findViewById(R.id.foodIngredients9_btn_AllergyActivity);
 
+        save_btn = (Button) findViewById(R.id.save_btn_AllergyActivity);
+        watch_btn = (Button) findViewById(R.id.watch_btn_AllergyActivity);
+
+        /*
+         * 알러지 강도 선택 ItemSelectedListener
+         * 선택한 값을 intensity 변수에 넣음
+         */
         allergyIntensity_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -118,6 +128,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
+        /*
+         * 날짜 선택 ItemSelectedListener
+         * 선택한 값을 tiem 변수에 넣음
+         */
         occurrenceDate_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -130,8 +144,6 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        save_btn = (Button) findViewById(R.id.save_btn_AllergyActivity);
-        watch_btn = (Button) findViewById(R.id.watch_btn_AllergyActivity);
 
         /*
          * 재료를 입력받는 editText및 버튼 GONE 설정(edit : 1~9, button : 1~8까지)
@@ -179,7 +191,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 position = i;
             }
         });
-
+        //positive button 클릭시 occurrenceArea_tv에 text 지정
         dig.setPositiveButton("선택", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -192,11 +204,18 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            /*
+             * case R.id.occurrenceDate_tv_AllergyActivity
+             *
+             * occurrenceDate_tv_AllergyActivity 클릭 이벤트 발생시
+             * datepicker dialog 띄움
+             */
             case R.id.occurrenceDate_tv_AllergyActivity:
                 DatePickerDialog dig = new DatePickerDialog(AllergyActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         String dayStr;
+                        //만약 day가 10보다 작으면 앞에 0을 붙여줌
                         if (day < 10)
                             dayStr = "0" + day;
                         else
@@ -208,13 +227,24 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 }, 2018, 11, 4);
                 dig.show();
                 break;
-
+            /*
+             * case R.id.save_btn_AllergyActivity
+             *
+             * 필수로 입력해야하는 값들이 전부 입력되면
+             * firebase에 AllergyResult 테이블을 생성하고(있으면 생성안함)
+             * 그 안에 데이터를 넣는다.
+             * 추가로 Allergy 테이블 안에 FoodResult 테이블을 생성하여
+             * 알러지 반응을 보였던 음식재료를 중복없이 넣는다.
+             */
             case R.id.save_btn_AllergyActivity:
                 List<String> foodIngerdientList = new ArrayList<String>();
                 final List<String> foodList = new ArrayList<String>();
 
 
-
+                /*
+                 * 만약 필수로 입력받아야 하는 값들(발생 부위, 발생일자, 재료)이 하나라도 "" 이면
+                 * dialog를 띄어서 해당 버튼의 기능(firebase 저장)이 실행되지 않게 함
+                 */
                 if(occurrenceArea_tv.getText().toString().equals("") || occurrenceDate_tv.getText().toString().equals("")
                         || foodIngredients_et[0].getText().toString().equals("")){
                     AlertDialog.Builder digbuild = new AlertDialog.Builder(AllergyActivity.this);
@@ -230,13 +260,18 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                     break;
                 }
 
+                //AllergyResult안에 FoodResult에 데이터를 넣기 전에 FoodResult에서 데이터를 받아옴
                 databaseReference.child("AllergyResult").addValueEventListener(new ValueEventListener() {
                     FoodResult result = null;
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        /*
+                         * addValueListener는 데이터가 추가될때마다 발생하기 때문에
+                         * if (!foodIngredients_et[0].getText().toString().equals("")) 를 추가해줘서
+                         * 이벤트가 한번만 발생되게 함.
+                         */
                         if (!foodIngredients_et[0].getText().toString().equals("")) {
-
-
+                            // for loop를 돌려 테이블명이 FoodList인것을 찾음
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 if (snapshot.getKey().equals("FoodResult")) {
                                     result = snapshot.getValue(FoodResult.class);
@@ -245,6 +280,10 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
                             if (result != null) {
                                 for (int i = 0; i < foodIngredientsPosition + 1; i++) {
+                                    /*
+                                     * firebase에서 가져온 FoodResult에서 현재 입력 받은 음식재료가 있는지 확인하고 없으면
+                                     * FoodResult의 List에 추가
+                                     */
                                     if (!result.getFoodIngredientsStr().contains(foodIngredients_et[i].getText().toString())) {
                                         if (!foodIngredients_et[i].getText().toString().equals("")) {
                                             result.getFoodIngredientsStr().add(foodIngredients_et[i].getText().toString());
@@ -252,6 +291,9 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                                     }
                                 }
                             } else {
+                                /*
+                                 *FoodResult 테이블이 없으면 새로 FoodResult class를 생성
+                                 */
                                 for (int i = 0; i < foodIngredientsPosition + 1; i++) {
                                     if (!foodIngredients_et[i].getText().toString().equals("")) {
                                         foodList.add(foodIngredients_et[i].getText().toString());
@@ -260,6 +302,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                                 }
                                 result = new FoodResult(foodList);
                             }
+                            //Allergy테이블 아래 FoodResult 테이블에 넣음
                             databaseReference.child("AllergyResult").child("FoodResult").setValue(result);
                             InitializeWiget();
                         }
@@ -278,7 +321,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
                 if(!foodIngredients_et[foodIngredientsPosition].getText().toString().equals("")) {
                     foodIngerdientList.add(foodIngredients_et[foodIngredientsPosition].getText().toString());
                 }
-
+                //입력받은 정보들을 firebase의 AllergyResult 테이블에 넣음
                 AllergyResult result = new AllergyResult(occurrenceArea_tv.getText().toString(), occurrenceDate_tv.getText().toString() + " " + time, intensity, foodIngerdientList, XValue, YValue);
                 databaseReference.child("AllergyResult").child(result.getOccurrenceDate()).setValue(result);
                 Toast.makeText(AllergyActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
@@ -374,7 +417,7 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
 
             /*
              * ImageView를 가져와 bitmap으로 변환
-             * 변환된 bitmap의 pixel정보를 가져와 색상이 255,255,255일때
+             * 변환된 bitmap의 pixel정보를 가져와 색상이 0,0,0일때
              * Toast message를 띄우고 return
              */
             ImageView img = (ImageView)view;
@@ -386,6 +429,11 @@ public class AllergyActivity extends AppCompatActivity implements View.OnClickLi
             int g = Color.green(argbValue);
             int b = Color.blue(argbValue);
 
+            /*
+             * 투명영역의 rgb 값이 0이기 때문에 터치한 x,y 좌표를 기준으로
+             * rgb 값이 0,0,0이면 이미지 영역 밖을 터치했다는 의미
+             * 따라서 ToastMessage를 띄운 후 아래 코드가 실행되지 않게 함
+             */
             if(r == 0 && g== 0 && b== 0){
                 Toast.makeText(AllergyActivity.this,"알러지 발생부분을 정확히 선택해주세요.",Toast.LENGTH_SHORT).show();
                 return false;

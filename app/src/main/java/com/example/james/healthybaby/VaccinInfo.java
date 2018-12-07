@@ -3,10 +3,11 @@ package com.example.james.healthybaby;
 import java.io.Serializable;
 
 /**
- * VaccinInfo class
- * @author lolhi
+ * VaccinInfo.java
+ * @author 장용주
  *
- * 백신의 간략한 정보를 가지는 class
+ * VaccinActivity에서 백신의 간략한 정보를 가지는 class
+ * intent로 VaccinDetailActivity로 넘기기 위해 Serializable implements
  */
 
 public class VaccinInfo implements Serializable {
